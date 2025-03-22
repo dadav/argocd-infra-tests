@@ -1,0 +1,30 @@
+---
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: apps
+  namespace: default
+spec:
+  goTemplate: true
+  goTemplateOptions: ["missingkey=error"]
+  generators:
+    - git:
+        repoURL: &repoURL https://github.com/dadav/argocd-infra-tests.git
+        revision: HEAD
+        directories:
+          - path: configs/clusters/local/*/kustomization.yaml
+  template:
+    metadata:
+      name: "{{.path.basename}}"
+    spec:
+      project: "default"
+      source:
+        repoURL: *repoURL
+        targetRevision: HEAD
+        path: "{{.path.Dir .path.path}}"
+      destination:
+        server: https://kubernetes.default.svc
+        namespace: "default"
+      # syncPolicy:
+      #   syncOptions:
+      #     - CreateNamespace=true
