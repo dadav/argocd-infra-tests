@@ -2,5 +2,15 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 
+namespace: cluster-configs
+
 resources:
   - ../../../../apps/cluster-configs
+
+patches:
+  - target:
+      group: ""
+      version: v1
+      kind: Namespace
+      name: cluster-configs
+    path: overlays/patch.yaml
