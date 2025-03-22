@@ -13,4 +13,4 @@ patches:
       version: v1
       kind: Namespace
       name: cluster-configs
-    path: overlays/patch.yaml
+    path: patch.yaml
