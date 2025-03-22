@@ -12,9 +12,7 @@ spec:
         repoURL: &repoURL https://github.com/dadav/argocd-infra-tests.git
         revision: HEAD
         directories:
-          - path: configs/clusters/local/*
-          - path: configs/clusters/local/applicationset.yaml
-            exclude: true
+          - path: configs/clusters/local/apps/*
   template:
     metadata:
       name: "{{.path.basename}}"
