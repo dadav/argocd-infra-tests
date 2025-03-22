@@ -6,3 +6,6 @@ namespace: common
 
 resources:
   - ns-config.yaml
+  - cm1.yaml
+  - cm2.yaml
+  - cm3.yaml
