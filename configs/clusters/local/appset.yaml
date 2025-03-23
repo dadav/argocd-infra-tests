@@ -3,7 +3,7 @@ apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
 metadata:
   name: apps
-  namespace: default
+  namespace: argocd
 spec:
   goTemplate: true
   goTemplateOptions: ["missingkey=error"]
@@ -24,4 +24,4 @@ spec:
         path: "{{.path.path}}"
       destination:
         server: https://kubernetes.default.svc
-        namespace: "default"
+        namespace: "argocd"
