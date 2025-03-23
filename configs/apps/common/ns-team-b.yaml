@@ -2,7 +2,7 @@
 apiVersion: v1
 kind: Namespace
 metadata:
-  name: cluster-configs
+  name: team-b
   annotations:
     argocd.argoproj.io/sync-wave: "-1"
 spec: {}
