@@ -35,35 +35,35 @@ spec:
     warn: false
 
   roles:
-    # A role which provides read-only access to all applications in the project
+    # Creates the `admin` role and asigns it to group `team-a`
     - name: read-write
-      description: Grants all required permissions for the team
+      description: |
+        Allow every action on applications in `team-a` project.
+        Also allow any action on repositories.
       policies:
         - p, proj:team-a:admin, applications, *, team-a/*, allow
-        - p, proj:team-a:admin, repositories, create, team-a/*, allow
-        - p, proj:team-a:admin, repositories, delete, team-a/*, allow
-        - p, proj:team-a:admin, repositories, update, team-a/*, allow
+        - p, proj:team-a:admin, repositories, *, team-a/*, allow
       groups:
         - team-a
 
   # Sync windows restrict when Applications may be synced. https://argo-cd.readthedocs.io/en/stable/user-guide/sync_windows/
-  syncWindows:
-    - kind: allow
-      schedule: "10 1 * * *"
-      duration: 1h
-      applications:
-        - "*-prod"
-      manualSync: true
-    - kind: deny
-      schedule: "0 22 * * *"
-      duration: 1h
-      namespaces:
-        - default
-    - kind: allow
-      schedule: "0 23 * * *"
-      duration: 1h
-      clusters:
-        - in-cluster
+  # syncWindows:
+  #   - kind: allow
+  #     schedule: "10 1 * * *"
+  #     duration: 1h
+  #     applications:
+  #       - "*-prod"
+  #     manualSync: true
+  #   - kind: deny
+  #     schedule: "0 22 * * *"
+  #     duration: 1h
+  #     namespaces:
+  #       - default
+  #   - kind: allow
+  #     schedule: "0 23 * * *"
+  #     duration: 1h
+  #     clusters:
+  #       - in-cluster
 
   # By default, apps may sync to any cluster specified under the `destinations` field, even if they are not
   # scoped to this project. Set the following field to `true` to restrict apps in this cluster to only clusters
